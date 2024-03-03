@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'emailAddress'
+		'emailAddress',
+		'gender'
 	],
 	#classVars : [
 		'Database'
@@ -54,6 +55,18 @@ Contact class >> removeContact: aContact [
 ]
 
 { #category : #accessing }
+Contact >> beFemale [
+
+	gender := #Female
+]
+
+{ #category : #accessing }
+Contact >> beMale [
+
+	gender := #Male
+]
+
+{ #category : #accessing }
 Contact >> emailAddress [
 
 	^ emailAddress
@@ -63,6 +76,24 @@ Contact >> emailAddress [
 Contact >> emailAddress: aString [
 
 	emailAddress := aString
+]
+
+{ #category : #accessing }
+Contact >> gender [
+
+	^ gender ifNil: [ gender := #male ]
+]
+
+{ #category : #accessing }
+Contact >> isFemale [
+
+	^ self gender = #Female
+]
+
+{ #category : #accessing }
+Contact >> isMale [
+
+	^ self gender = #male
 ]
 
 { #category : #accessing }

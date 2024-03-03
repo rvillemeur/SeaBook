@@ -31,23 +31,31 @@ ContactView >> renderContentOn: html [
 
 	html form: [
 		html text: 'Name: '.
-		html textInput
-			callback: [ :value | self contact name: value ];
-			value: self contact name.
+		html textInput on: #name of: self contact.
 		html break.
 		html text: 'Email address: '.
-		html textInput
-			callback: [ :value | self contact emailAddress: value ];
-			value: self contact emailAddress.
+		html textInput on: #emailAddress of: self contact.
 		html break.
-		html submitButton
-			callback: [ self save ];
-			value: 'Save' ]
+
+		"Drop-down menu"
+		html text: 'Gender: '.
+		html select
+			list: #( #Male #Female );
+			selected: self contact gender;
+			callback: [ :value |
+				value = #Male
+					ifTrue: [ self contact beMale ]
+					ifFalse: [ self contact beFemale ] ].
+		html break.
+
+		html submitButton on: #save of: self ]
 ]
 
 { #category : #actions }
 ContactView >> save [
 	"for now, let's just display the contact information"
 
-	self inform: self contact name , '--' , self contact emailAddress
+	self inform:
+		self contact name , '--' , self contact emailAddress , '--'
+		, self contact gender
 ]
