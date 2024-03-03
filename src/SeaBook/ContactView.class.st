@@ -37,9 +37,10 @@ ContactView >> renderContentOn: html [
 		html textInput on: #emailAddress of: self contact.
 		html break.
 
-		"Drop-down menu"
+		"list box"
 		html text: 'Gender: '.
 		html select
+			size: 2;
 			list: #( #Male #Female );
 			selected: self contact gender;
 			callback: [ :value |
