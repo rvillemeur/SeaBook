@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'name',
 		'emailAddress',
-		'gender'
+		'gender',
+		'requestEmailUpdates',
+		'birthDate'
 	],
 	#classVars : [
 		'Database'
@@ -67,6 +69,18 @@ Contact >> beMale [
 ]
 
 { #category : #accessing }
+Contact >> birthDate [
+
+	^ birthDate ifNil: [ birthDate := '1/1/1970' asDate]
+]
+
+{ #category : #accessing }
+Contact >> birthDate: anObject [
+
+	birthDate := anObject
+]
+
+{ #category : #accessing }
 Contact >> emailAddress [
 
 	^ emailAddress
@@ -106,4 +120,16 @@ Contact >> name [
 Contact >> name: aString [
 
 	name := aString
+]
+
+{ #category : #accessing }
+Contact >> requestEmailUpdates [
+
+	^ requestEmailUpdates ifNil: [ requestEmailUpdates := false ]
+]
+
+{ #category : #accessing }
+Contact >> requestEmailUpdates: aBoolean [
+
+	^ requestEmailUpdates := aBoolean
 ]

@@ -49,9 +49,21 @@ ContactView >> renderContentOn: html [
 			selected: self contact isFemale;
 			callback: [ self contact beFemale ].
 		html text: 'Female'.
-
 		html break.
 
+		"Checkbox"
+		html text: 'Send email updates: '.
+		html checkbox
+			value: self contact requestEmailUpdates;
+			callback: [ :value | self contact requestEmailUpdates: value ].
+		html break.
+
+		"date input"
+		html dateInput
+			callback: [ :value | self contact birthDate: value ];
+			with: self contact birthDate.
+		html break.
+		
 		html submitButton on: #save of: self ]
 ]
 
@@ -61,5 +73,8 @@ ContactView >> save [
 
 	self inform:
 		self contact name , '--' , self contact emailAddress , '--'
-		, self contact gender
+		, self contact gender , '--'
+		, self contact requestEmailUpdates printString
+		, '--'
+		, self contact birthDate  printString
 ]
