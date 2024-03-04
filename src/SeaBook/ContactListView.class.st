@@ -20,6 +20,20 @@ ContactListView >> addContact [
 	Contact addContact: (Contact name: name emailAddress: emailAddress)
 ]
 
+{ #category : #'as yet unclassified' }
+ContactListView >> editContact: aContact [
+
+	| view copy |
+	view := ContactView new.
+	copy := aContact copy.
+	view contact: copy.
+	(self call: view) ifTrue: [
+		Contact
+			removeContact: aContact;
+			addContact: copy ].
+	self inform: 'Thanks for editing ' , aContact name
+]
+
 { #category : #removing }
 ContactListView >> removeContact: aContact [
 
@@ -36,6 +50,9 @@ ContactListView >> renderContact: aContact on: html [
 		url: 'mailto:' , aContact emailAddress;
 		with: aContact emailAddress.
 	html text: '('.
+	html anchor
+		callback: [ self editContact: aContact ];
+		with: 'edit '.
 	html anchor
 		callback: [ self removeContact: aContact ];
 		with: 'remove'.

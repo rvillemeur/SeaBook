@@ -51,3 +51,9 @@ WebCounter >> renderContentOn: html [
 		callback: [ self decrease ];
 		with: '--'
 ]
+
+{ #category : #hooks }
+WebCounter >> states [
+
+	^ Array with: self
+]
